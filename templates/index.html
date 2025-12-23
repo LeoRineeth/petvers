@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Create a New Pet</h2>
+
+<form action="{{ url_for('create') }}" method="post">
+  <input name="name" placeholder="Pet name" required>
+  <select name="species">
+    <option value="cat">Cat</option>
+    <option value="dog">Dog</option>
+    <option value="dragon">Dragon</option>
+  </select>
+  <button type="submit">Create</button>
+</form>
+
+<h2>Your Pets</h2>
+
+{% if pets %}
+  <ul>
+    {% for p in pets %}
+      <li>
+        <a href="{{ url_for('pet_page', name=p.name) }}">{{ p.name }}</a>
+        — Level {{ p.level }}
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No pets yet.</p>
+{% endif %}
+
+{% endblock %}

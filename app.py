@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 from backend import PetWorld, SHOP_ITEMS
 
 app = Flask(__name__)
-app.secret_key = "petverse-secret-key"  # required for flash messages
+app.secret_key = "perverse-secret-key"  # required for flash messages
 
 # create global world object
 world = PetWorld()

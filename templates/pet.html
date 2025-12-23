@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>{{ pet.name }} ({{ pet.evolution }})</h2>
+
+<ul>
+  <li>Level: {{ pet.level }}</li>
+  <li>XP: {{ pet.xp }}</li>
+  <li>Hunger: {{ pet.hunger }}</li>
+  <li>Energy: {{ pet.energy }}</li>
+  <li>Coins: {{ pet.coins }}</li>
+</ul>
+
+<h3>Actions</h3>
+
+<form action="{{ url_for('feed', name=pet.name) }}" method="post">
+  <button type="submit">Feed</button>
+</form>
+
+<form action="{{ url_for('play', name=pet.name) }}" method="post">
+  <input name="minutes" placeholder="10">
+  <button type="submit">Play</button>
+</form>
+
+<form action="{{ url_for('rest', name=pet.name) }}" method="post">
+  <input name="minutes" placeholder="30">
+  <button type="submit">Rest</button>
+</form>
+
+<h3>Shop</h3>
+<form action="{{ url_for('buy', name=pet.name) }}" method="post">
+  <select name="item_key">
+    {% for key, val in shop.items() %}
+      <option value="{{ key }}">{{ key }} - {{ val.price }} coins</option>
+    {% endfor %}
+  </select>
+  <button type="submit">Buy</button>
+</form>
+
+<h3>Daily Reward</h3>
+<form action="{{ url_for('daily_reward', name=pet.name) }}" method="post">
+  <button type="submit">Claim Daily Coins</button>
+</form>
+
+<h3>Work</h3>
+<form action="{{ url_for('work', name=pet.name) }}" method="post">
+  <input name="minutes" placeholder="30">
+  <button type="submit">Send to Work</button>
+</form>
+
+<form action="{{ url_for('delete', name=pet.name) }}" method="post">
+  <button type="submit" style="background:red;color:white;">Delete Pet</button>
+</form>
+
+<p><a href="{{ url_for('index') }}">Back</a></p>
+{% endblock %}
